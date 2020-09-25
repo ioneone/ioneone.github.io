@@ -1,0 +1,115 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.24.61"/><link as="script" rel="preload" href="/webpack-runtime-31eff9f6de6a78281191.js"/><link as="script" rel="preload" href="/framework-8c8d363c63d1a9a80d21.js"/><link as="script" rel="preload" href="/app-27cbead1645704184000.js"/><link as="script" rel="preload" href="/component---src-templates-template-tsx-22a77df47c41414055d5.js"/><link as="fetch" rel="preload" href="/page-data/publication/getting-started-with-graphql/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body><script>(function() { try {
+  var mode = localStorage.getItem('theme-ui-color-mode');
+  if (!mode) return
+  document.body.classList.add('theme-ui-' + mode);
+} catch (e) {} })();</script><div id="___gatsby"><style data-emotion-css="o6iwr5">body{color:var(--theme-ui-colors-text,#eeeeee);background-color:var(--theme-ui-colors-background,#222831);}</style><style data-emotion-css="1i4gds7">*{box-sizing:border-box;}body{margin:0;font-family:Roboto,system-ui,sans-serif;line-height:1.5;font-weight:400;}</style><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><style data-emotion-css="sqgjur">.css-sqgjur{margin:0 auto;max-width:960px;padding:0 16px;}</style><div class="css-sqgjur"><style data-emotion-css="1sg2lsz">.css-1sg2lsz{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}</style><div class="css-1sg2lsz"><style data-emotion-css="1lyhuuf">.css-1lyhuuf{font-family:"Bungee Shade";color:#00adb5;cursor:pointer;}</style><h1 class="css-1lyhuuf"><style data-emotion-css="2hhz9b">.css-2hhz9b{color:inherit;}</style><a href="/" class="css-2hhz9b">JW</a></h1><div style="flex-basis:32px;flex-grow:0;flex-shrink:0;display:block"></div><style data-emotion-css="1ewxdpl">.css-1ewxdpl{cursor:pointer;-webkit-text-decoration:none;text-decoration:none;color:inherit;font-size:16px;font-weight:bold;}.css-1ewxdpl:hover{color:#a6a6a4;}</style><a href="/resume.pdf" class="css-1ewxdpl">📜 Resume</a></div><div style="height:64px;flex-grow:0;flex-shrink:0;display:block"></div><div><style data-emotion-css="1pctqj">.css-1pctqj a{color:#eeeeee;}.css-1pctqj a:hover{color:#a6a6a4;}.css-1pctqj img,.css-1pctqj iframe{max-width:100%;display:block;margin:0 auto;}</style><div class="css-1pctqj"><h1>Getting Started with GraphQL</h1>
+<p>I took a class at UCLA in which the professor invited a guest from industry to introduce GraphQL. I thought it's such an interesting technology to learn because it changes the way we see APIs. I thought it's cool that you can make a query from the front-end to get what you want from the server. Since it was a pretty new technology, I decided to give back to the community by documenting my learning process of GraphQL.</p>
+<p>Getting Started with GraphQL consists of 5 parts as follows:</p>
+<ol>
+<li><a href="https://medium.com/@ionejunhong/getting-started-with-graphql-a1cc7951ef39?source=friends_link&sk=4785daf7f0bc80f7d25150f3a903932d">Introduction</a></li>
+<li><a href="https://medium.com/better-programming/getting-started-with-graphql-5cd8e7c66909?source=friends_link&sk=1ca5c58e69b339b4736f258bb9ba850f">Back End</a></li>
+<li><a href="https://medium.com/@ionejunhong/getting-started-with-graphql-54bfa51a848f?source=friends_link&sk=f48adbca4d28f422a73060fef671dc55">Front End</a></li>
+<li><a href="https://medium.com/@ionejunhong/getting-started-with-graphql-a281b14a560d?source=friends_link&sk=065e2e6473674e6203a4bdb35fedd77e">Basic Features</a></li>
+<li><a href="https://medium.com/@ionejunhong/getting-started-with-graphql-77f03d611136?source=friends_link&sk=08d24543d3ef0d724748c84e4e54e79e">Deployment</a></li>
+</ol>
+<p>At the end of this series, I built a web application called Jflix, where you can view my favorites movies and TV shows. You can check out the demo <a href="https://jflix.herokuapp.com/">here</a>. It's live!</p>
+<p>I was once asked "What is GraphQL?" during a technical interview (because of this project). I wasn't prepared for this question although I wrote the series. I'm going to write down my answer here, so that next time someone asks me the same question, I can ace it:)</p>
+<h2>🤔 Why GraphQL?</h2>
+<p>Before we talk about what GraphQL is, let's talk about why we need it and what kind of problems GraphQL solves. Traditionally, we use REST API, where the back-end provides API endpoint and we just use whatever back-end provides on the front-end. There is a limitation with REST API. Say you have a page with list of movies to show with endpoint <code>/movies</code>.</p>
+<pre><code class="language-json">{
+  "movies": [
+    {
+      "title": "Bird Box"
+    },
+    {
+      "title": "What Happened to Monday"
+    },
+    ...
+  ]
+}
+</code></pre>
+<p>Now you have another page with a list of movies, but also with the description for every movie. There is two approaches to this.</p>
+<ol>
+<li>Update the endpoint "/movies" to also return movie description.</li>
+<li>Create another endpoint "/movie-with-descriptions" that return movie title and description.</li>
+</ol>
+<p>There is a problem with either approach. For the first one, we are requesting extra information for the first page (which only needs the titles). For the second approach, we have a scalability issue. For every new endpoint, we need to come up with an endpoint with a reasonable name. Soon enough, we will have hard time coming up with a good name (e.g. <code>movie/id/details/likes/id</code>). This is exactly the problem GraphQL tries to solve.</p>
+<h2>🤓 What is GraphQL?</h2>
+<p>In stead of letting server to decide what to provide, we send a query to the server telling it what we want as follows:</p>
+<pre><code class="language-json">{
+    movies {
+        title
+    }
+}
+</code></pre>
+<p>This tells the server that we want a list of movies, and we only need the title property of a movie. If we want the description as well, then we can just send a query that says so.</p>
+<pre><code class="language-json">{
+    movies {
+        title
+        description
+    }
+}
+</code></pre>
+<h2>😮 How does GraphQL work?</h2>
+<p>Server needs to know the graph structure of the data to process such a dynamic request from client.</p>
+<pre><code class="language-javascript">const MovieType = new GraphQLObjectType({
+  name: "Movie",
+  fields: () => ({
+    title: { type: GraphQLString },
+    description: { type: GraphQLString },
+  }),
+})
+</code></pre>
+<p>Once the graph data structure is constructed, we tell server where the root of the graph is. This is sort of like the endpoint from REST API.</p>
+<pre><code class="language-javascript">const RootQueryType = new GraphQLObjectType({
+  name: "RootQuery",
+  fields: () => ({
+    movies: {
+      type: new GraphQLList(MovieType),
+      resolve: async (parentValue, args) => {
+        return await Movie.find({}) // return data
+      },
+    },
+  }),
+})
+</code></pre>
+<p>If the client request only the title, the server returns <code>data.title</code>. If the client request both title and description, then it returns <code>data.title</code> and <code>data.description</code>.</p>
+<p>The beauty of GraphQL does not end here. Suppose a movie object has a foreign key to a MovieGenre object, which contains name (genre name) and list of movies with that genre.</p>
+<pre><code class="language-json">{
+  "1": {
+    "name": "Action",
+    "movie_ids": [1, 3, 17]
+  },
+  ...
+}
+</code></pre>
+<p>Then we can modify MovieType as follows to allow it to return rating data if requested.</p>
+<pre><code class="language-javascript">const MovieType = new GraphQLObjectType({
+  name: "Movie",
+  fields: () => ({
+    title: { type: GraphQLString },
+    description: { type: GraphQLString },
+    genres: {
+      type: new GraphQLList(MovieGenreType),
+      resolve: async (parentValue, args) => {
+        return await MovieGenre.find({
+          _id: { $in: parentValue.genre_ids },
+        })
+      },
+    },
+  }),
+})
+</code></pre>
+<p>For example, we can do something like this.</p>
+<pre><code class="language-json">{
+    movies {
+        title
+        description
+        genres {
+            name
+        }
+    }
+}
+</code></pre>
+<p>This is requesting title, description, and genre name for each movie.</p>
+<p>For more details about the implementation and more examples, check out the series linked above!</p></div></div><div style="height:128px;flex-grow:0;flex-shrink:0;display:block"></div><div style="text-align:center"><h5>Code &amp; Design by Junhong Wang ©︎ 2020</h5><div style="height:32px;flex-grow:0;flex-shrink:0;display:block"></div></div></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/publication/getting-started-with-graphql";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-1841db332360a105faeb.js"],"app":["/app-27cbead1645704184000.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-a36d224daf5b6b62fa0f.js"],"component---src-templates-template-tsx":["/component---src-templates-template-tsx-22a77df47c41414055d5.js"]};/*]]>*/</script><script src="/polyfill-1841db332360a105faeb.js" nomodule=""></script><script src="/component---src-templates-template-tsx-22a77df47c41414055d5.js" async=""></script><script src="/app-27cbead1645704184000.js" async=""></script><script src="/framework-8c8d363c63d1a9a80d21.js" async=""></script><script src="/webpack-runtime-31eff9f6de6a78281191.js" async=""></script></body></html>
